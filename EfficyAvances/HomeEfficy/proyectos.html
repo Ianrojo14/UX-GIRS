@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efficy Dashboard</title>
     <link rel="stylesheet" href="Assets/home/style.css">
+    <script type="module" src="Assets/home/home.js" defer></script>
 </head>
 <body>
     <header>
@@ -16,7 +17,16 @@
             <span style="margin-right: 30px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
               </svg></span>
-              <span id="usuarioCorreo" style="margin-right: 10px;"></span> 
+              <span id="usuarioNombre" style="margin-right: 10px;"></span>
+              <button id="logoutButton" style="margin-left: 10px; padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Cerrar Sesión
+            </button>
+            <script>
+                document.getElementById("logoutButton").addEventListener("click", function() {
+                    localStorage.removeItem("usuarioLogueado");
+                    window.location.href = "login.html";
+                });
+            </script>
             <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -59,10 +69,134 @@
             <span>2025</span> | <a href="#">Privacidad</a>
         </footer>
     </div>
+        <!-- Modal -->
+    <div id="workingModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <div class="modal-body">
+          <h2 id="animatedText">¡Seguimos trabajando!</h2>
+        </div>
+      </div>
+    </div>
     
+    <style>
+      /* Estilos del modal */
+      .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+      }
+    
+      .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        text-align: center;
+        border-radius: 8px;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+    
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+      }
+    
+      /* Animación de las letras */
+      #animatedText span {
+        display: inline-block;
+        animation: bounce 1.5s infinite;
+      }
+    
+      #animatedText span:nth-child(1) { animation-delay: 0s; }
+      #animatedText span:nth-child(2) { animation-delay: 0.1s; }
+      #animatedText span:nth-child(3) { animation-delay: 0.2s; }
+      #animatedText span:nth-child(4) { animation-delay: 0.3s; }
+      #animatedText span:nth-child(5) { animation-delay: 0.4s; }
+      #animatedText span:nth-child(6) { animation-delay: 0.5s; }
+      #animatedText span:nth-child(7) { animation-delay: 0.6s; }
+      #animatedText span:nth-child(8) { animation-delay: 0.7s; }
+      #animatedText span:nth-child(9) { animation-delay: 0.8s; }
+      #animatedText span:nth-child(10) { animation-delay: 0.9s; }
+      #animatedText span:nth-child(11) { animation-delay: 1s; }
+      #animatedText span:nth-child(12) { animation-delay: 1.1s; }
+      #animatedText span:nth-child(13) { animation-delay: 1.2s; }
+      #animatedText span:nth-child(14) { animation-delay: 1.3s; }
+      #animatedText span:nth-child(15) { animation-delay: 1.4s; }
+    
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
 </body>
 </html>
 <script>
+  // Función para abrir el modal
+  function abrirModal() {
+    const modal = document.getElementById("workingModal");
+    const text = "¡Seguimos trabajando!";
+    const animatedText = document.getElementById("animatedText");
+
+    // Limpiar el contenido del texto animado
+    animatedText.innerHTML = "";
+
+    // Crear un span para cada letra y agregarlo al texto animado
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement("span");
+      span.textContent = text[i];
+      animatedText.appendChild(span);
+    }
+
+    modal.style.display = "block";
+
+    // Redirigir al home.html después de 1.5 segundos
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 1500);
+  }
+
+  // Función para cerrar el modal
+  function cerrarModal() {
+    const modal = document.getElementById("workingModal");
+    modal.style.display = "none";
+  }
+
+  // Mostrar el modal automáticamente al cargar la página
+  window.onload = function () {
+    abrirModal();
+  };
+</script>
+<!-- <script>
   // Recuperar el correo del usuario logueado desde localStorage
   const usuarioCorreo = localStorage.getItem("usuarioLogueado");
 
@@ -73,4 +207,4 @@
       // Si no hay usuario logueado, redirigir al login
       window.location.href = "login.html";
   }
-</script>
+</script> -->
