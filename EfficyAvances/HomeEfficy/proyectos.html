@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efficy Dashboard</title>
     <link rel="stylesheet" href="Assets/home/style.css">
+    <link rel="stylesheet" href="Assets/proyectos/style.css">
     <script type="module" src="Assets/home/home.js" defer></script>
 </head>
 <body>
@@ -69,142 +70,71 @@
             <span>2025</span> | <a href="#">Privacidad</a>
         </footer>
     </div>
-        <!-- Modal -->
-    <div id="workingModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <div class="modal-body">
-          <h2 id="animatedText">¡Seguimos trabajando!</h2>
+
+    <div class="main-content" style="display: flex; gap: 20px;">
+  
+      <!-- Cuadro de Proyectos -->
+      <div class="tasks" style="flex: 1;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h2>Proyectos</h2>
+          <button id="openModalButton"
+            style="font-size: 20px; background-color: #00538A; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: auto;">
+            +
+          </button>
+        </div>
+  
+        <div id="createProjectModal" class="modal">
+          <div class="modal-content">
+            <h3>Nuevo Proyecto</h3>
+            <form id="createProjectForm" class="create-project-form">
+              <input type="text" id="projectName" placeholder="Nombre" required>
+              <input type="text" id="projectDescription" placeholder="Descripción" required>
+              <div class="button-container">
+                <button type="button" id="closeModalButton" style="background-color: rgb(97, 97, 97);">Cancelar</button>
+                <button type="submit" style="background-color: #00538A;">Crear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+  
+        <div class="project-list" id="projectList" style="margin-top: 30px;">
+          <!-- Proyectos cargados por JavaScript -->
         </div>
       </div>
-    </div>
-    
-    <style>
-      /* Estilos del modal */
-      .modal {
-        display: none; /* Oculto por defecto */
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-      }
-    
-      .modal-content {
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50%;
-        text-align: center;
-        border-radius: 8px;
-        animation: fadeIn 0.5s ease-in-out;
-      }
-    
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-    
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-      }
-    
-      /* Animación de las letras */
-      #animatedText span {
-        display: inline-block;
-        animation: bounce 1.5s infinite;
-      }
-    
-      #animatedText span:nth-child(1) { animation-delay: 0s; }
-      #animatedText span:nth-child(2) { animation-delay: 0.1s; }
-      #animatedText span:nth-child(3) { animation-delay: 0.2s; }
-      #animatedText span:nth-child(4) { animation-delay: 0.3s; }
-      #animatedText span:nth-child(5) { animation-delay: 0.4s; }
-      #animatedText span:nth-child(6) { animation-delay: 0.5s; }
-      #animatedText span:nth-child(7) { animation-delay: 0.6s; }
-      #animatedText span:nth-child(8) { animation-delay: 0.7s; }
-      #animatedText span:nth-child(9) { animation-delay: 0.8s; }
-      #animatedText span:nth-child(10) { animation-delay: 0.9s; }
-      #animatedText span:nth-child(11) { animation-delay: 1s; }
-      #animatedText span:nth-child(12) { animation-delay: 1.1s; }
-      #animatedText span:nth-child(13) { animation-delay: 1.2s; }
-      #animatedText span:nth-child(14) { animation-delay: 1.3s; }
-      #animatedText span:nth-child(15) { animation-delay: 1.4s; }
-    
-      @keyframes bounce {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-    
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
+  
+      <!-- Cuadro de Equipos -->
+      <div class="tasks" style="flex: 1;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h2>Equipos</h2>
+          <button id="openTeamModalButton"
+            style="font-size: 20px; background-color: #00538A; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: auto;">
+            +
+          </button>
+        </div>
+  
+        <div id="createTeamModal" class="modal">
+          <div class="modal-content">
+            <h3>Nuevo Equipo</h3>
+            <form id="createTeamForm" class="create-project-form">
+              <input type="text" id="teamName" placeholder="Nombre" required>
+              <input type="text" id="teamDescription" placeholder="Descripción" required>
+              <div class="button-container">
+                <button type="button" id="closeTeamModalButton" style="background-color: rgb(97, 97, 97);">Cancelar</button>
+                <button type="submit" style="background-color: #00538A;">Crear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+  
+        <div class="project-list" id="teamList" style="margin-top: 30px;">
+          <!-- Equipos cargados por JavaScript -->
+        </div>
+      </div>
+  
+  </div>
+  
+
+
+<script src="Assets/proyectos/proyectos.js"></script>
 </body>
 </html>
-<script>
-  // Función para abrir el modal
-  function abrirModal() {
-    const modal = document.getElementById("workingModal");
-    const text = "¡Seguimos trabajando!";
-    const animatedText = document.getElementById("animatedText");
-
-    // Limpiar el contenido del texto animado
-    animatedText.innerHTML = "";
-
-    // Crear un span para cada letra y agregarlo al texto animado
-    for (let i = 0; i < text.length; i++) {
-      const span = document.createElement("span");
-      span.textContent = text[i];
-      animatedText.appendChild(span);
-    }
-
-    modal.style.display = "block";
-
-    // Redirigir al home.html después de 1.5 segundos
-    setTimeout(() => {
-      window.location.href = "home.html";
-    }, 1500);
-  }
-
-  // Función para cerrar el modal
-  function cerrarModal() {
-    const modal = document.getElementById("workingModal");
-    modal.style.display = "none";
-  }
-
-  // Mostrar el modal automáticamente al cargar la página
-  window.onload = function () {
-    abrirModal();
-  };
-</script>
-<!-- <script>
-  // Recuperar el correo del usuario logueado desde localStorage
-  const usuarioCorreo = localStorage.getItem("usuarioLogueado");
-
-  // Mostrar el correo en el span correspondiente
-  if (usuarioCorreo) {
-      document.getElementById("usuarioCorreo").textContent = usuarioCorreo;
-  } else {
-      // Si no hay usuario logueado, redirigir al login
-      window.location.href = "login.html";
-  }
-</script> -->

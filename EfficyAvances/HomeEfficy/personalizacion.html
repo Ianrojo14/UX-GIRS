@@ -74,17 +74,17 @@
           <span>2025</span> | <a href="#">Privacidad</a>
       </footer>
   </div>
-
+  <div class="main-content">
     <div class="edit-user">
-      <h2>Editar Perfil</h2>
+      <h2 style="margin-top: 100px;">Editar Perfil</h2>
       <form id="editUserForm" action="javascript:void(0);">
-        <label for="editNombre">Usuario:</label>
+        <label class="center" for="editNombre">Usuario:</label>
         <input type="text" id="editNombre" placeholder="Nuevo nombre de usuario">
-    
+
         <button type="button" onclick="editarUsuario()">Guardar Cambios</button>
       </form>
     </div>
-
+  </div>
     <!-- <script>
       // Recuperar el correo del usuario logueado desde localStorage
       const usuarioCorreo = localStorage.getItem("usuarioLogueado");
